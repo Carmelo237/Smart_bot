@@ -2,7 +2,6 @@ import streamlit as st
 from mistralai import Mistral
 
 def generate_response(user_input):
-    api_key = "9F8Lnhk8zfkxKxj3EfCyY3j9RzIaVwjB"
     model = "mistral-large-latest"
 
     client = Mistral(api_key=api_key)
@@ -39,4 +38,4 @@ for sender, message in st.session_state.chat_history:
     if sender == "Vous":
         st.write(f"**{sender}:** {message}")
     else:
-        st.write(f"*{sender}:* {message}") Je veux que tu m'eplique chaque bout de ce code 
+        st.write(f"*{sender}:* {message}") 
