@@ -39,4 +39,4 @@ for sender, message in st.session_state.chat_history:
     if sender == "Vous":
         st.write(f"**{sender}:** {message}")
     else:
-        st.write(f"*{sender}:* {message}")
+        st.write(f"*{sender}:* {message}") Je veux que tu m'eplique chaque bout de ce code 
