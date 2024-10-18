@@ -5,7 +5,7 @@ def generate_response(user_input):
     model = "mistral-large-latest"
     # st.write(f"Your API key is: {os.environ['mistral_key']}")
     
-    st.write(f"Your API key is: {mistral_key}")
+    st.write(f"Your API key is: {st.secrets}")
 
     # client = Mistral(api_key=os.environ['mistral_key'])
 
