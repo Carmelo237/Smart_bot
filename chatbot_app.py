@@ -1,11 +1,11 @@
 import streamlit as st
 from mistralai import Mistral
+import os
 
 def generate_response(user_input):
     model = "mistral-large-latest"
-    api_key = st.secrets=['MISTRALKEY']
-    print(api_key)
-    print("coucou")
+    api_key = os.environ=['MISTRALKEY']
+
     client = Mistral(api_key=api_key)
 
     chat_response = client.chat.complete(
