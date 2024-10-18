@@ -11,7 +11,7 @@ def generate_response(user_input):
         model = model,
         messages = [
             {
-                "role": "system",
+                "role": "assistant",
                 "content": "A chaque que tu vas répondre à une question réponds en alexandrin",
             },
             {
