@@ -4,7 +4,7 @@ from mistralai import Mistral
 def generate_response(user_input):
     model = "mistral-large-latest"
 
-    client = Mistral(mistralai_key=mistralai_key)
+    client = Mistral(mistralai_key=MISTRALKEY)
 
     chat_response = client.chat.complete(
         model = model,
