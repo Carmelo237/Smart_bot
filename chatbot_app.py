@@ -3,8 +3,8 @@ from mistralai import Mistral
 
 def generate_response(user_input):
     model = "mistral-large-latest"
-
-    client = Mistral(mistralai_key=MISTRALKEY)
+    api_key = st.secrets=['MISTRALKEY']
+    client = Mistral(mistralai_key=api_key)
 
     chat_response = client.chat.complete(
         model = model,
