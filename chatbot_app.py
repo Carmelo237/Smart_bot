@@ -1,10 +1,9 @@
 import streamlit as st
 from mistralai import Mistral
-import os
 
 def generate_response(user_input):
     model = "mistral-large-latest"
-    api_key = os.environ=['MISTRALKEY']
+    api_key = st.secrets=['MISTRALKEY']
 
     client = Mistral(api_key=api_key)
 
