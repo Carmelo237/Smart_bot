@@ -3,7 +3,7 @@ from mistralai import Mistral
 
 def generate_response(user_input):
     model = "mistral-large-latest"
-    api_key = st.secrets=['MISTRALKEY']
+    api_key = st.secrets["api_keys"]['MISTRALKEY']
 
     client = Mistral(api_key=api_key)
 
