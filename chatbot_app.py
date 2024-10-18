@@ -1,25 +1,23 @@
 import streamlit as st
 from mistralai import Mistral
-import os
+
 def generate_response(user_input):
     model = "mistral-large-latest"
-    # st.write(f"Your API key is: {os.environ['mistral_key']}")
+
     
-    st.write(f"Your API key is: {st.secrets}")
+    client = Mistral(api_key=st.secrets["mistral_key"])
 
-    # client = Mistral(api_key=os.environ['mistral_key'])
+    chat_response = client.chat.complete(
+        model = model,
+        messages = [
+            {
+                "role": "user",
+                "content": user_input,
+            },
+        ]
+    )
+    return(chat_response.choices[0].message.content)
 
-    # chat_response = client.chat.complete(
-    #     model = model,
-    #     messages = [
-    #         {
-    #             "role": "user",
-    #             "content": user_input,
-    #         },
-    #     ]
-    # )
-    # return(chat_response.choices[0].message.content)
-    return None
     
 st.title("Chatbot avec Streamlit")
 st.write("Bienvenue sur l'interface de chatbot. Posez-moi des questions !")
