@@ -3,20 +3,21 @@ from mistralai import Mistral
 
 def generate_response(user_input):
     model = "mistral-large-latest"
-    api_key = st.secrets["api_keys"]
+    api_key = st.secrets.items()
     st.write(f"Your API key is: {api_key}")
-    client = Mistral(api_key=api_key)
+    # client = Mistral(api_key=api_key)
 
-    chat_response = client.chat.complete(
-        model = model,
-        messages = [
-            {
-                "role": "user",
-                "content": user_input,
-            },
-        ]
-    )
-    return(chat_response.choices[0].message.content)
+    # chat_response = client.chat.complete(
+    #     model = model,
+    #     messages = [
+    #         {
+    #             "role": "user",
+    #             "content": user_input,
+    #         },
+    #     ]
+    # )
+    # return(chat_response.choices[0].message.content)
+    return None
     
 st.title("Chatbot avec Streamlit")
 st.write("Bienvenue sur l'interface de chatbot. Posez-moi des questions !")
