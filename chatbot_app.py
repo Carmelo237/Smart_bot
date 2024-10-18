@@ -6,7 +6,7 @@ def generate_response(user_input):
 
 
     st.write(f"Your API key is: {st.secrets}")
-    st.write(f"{os.environ['mistral_key ']}")
+
     # client = Mistral(api_key=api_key)
 
     # chat_response = client.chat.complete(
