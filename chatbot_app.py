@@ -3,8 +3,8 @@ from mistralai import Mistral
 import os
 def generate_response(user_input):
     model = "mistral-large-latest"
-
-
+    st.write(f"Your API key is: {os.environ['mistral_key']}")
+    
     st.write(f"Your API key is: {st.secrets}")
 
     # client = Mistral(api_key=api_key)
