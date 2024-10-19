@@ -12,7 +12,7 @@ def generate_response(user_input):
         messages = [
             {
                 "role": "assistant",
-                "content": "A chaque que tu vas répondre à une question réponds avec des punchlines en Français",
+                "content": "A chaque que tu vas répondre à une question réponds avec des punchlines en anglais",
             },
             {
                 "role": "user",
