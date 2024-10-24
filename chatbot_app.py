@@ -1,6 +1,7 @@
 import streamlit as st
 from mistralai import Mistral
 import pandas as pd
+import fitz  # PyMuPDF
 
 # Fonction pour générer une réponse à partir de l'API Mistral
 def generate_response(user_input, context=None):
@@ -80,7 +81,7 @@ if st.button('Réinitialiser'):
 
 # Ajout d'une épingle pour télécharger des fichiers
 st.write("### Téléchargez un fichier")
-uploaded_file = st.file_uploader("Choisissez un fichier", type=["txt", "csv", "xlsx"])
+uploaded_file = st.file_uploader("Choisissez un fichier", type=["txt", "csv", "xlsx", "pdf"])
 
 if uploaded_file is not None:
     # Affiche le nom du fichier téléchargé
@@ -102,4 +103,16 @@ if uploaded_file is not None:
         st.session_state.file_content = df.to_string()  # Convertir le DataFrame en string
         st.write("Aperçu du fichier Excel :")
         st.dataframe(df.head())  # Afficher les 5 premières lignes
+    elif uploaded_file.type == "application/pdf":
+        # Lire le contenu du fichier PDF
+        pdf_document = fitz.open(uploaded_file)
+        text = ""
+        for page in pdf_document:
+            text += page.get_text()  # Extraire le texte de chaque page
+        pdf_document.close()
+        
+        st.session_state.file_content = text  # Stocker le texte dans l'état de la session
+        st.write("Contenu du fichier PDF :")
+        st.text_area("Contenu", text, height=300)
+
 
