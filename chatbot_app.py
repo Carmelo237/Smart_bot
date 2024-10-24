@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 from mistralai import Mistral
 
 # Fonction pour générer une réponse à partir de l'API Mistral
@@ -27,7 +26,7 @@ def generate_response(user_input):
 
 # Titre de l'application
 st.title("Chatbot avec Streamlit")
-st.write("Bienvenue sur l'interface de chatbot. Posez-moi des questions !")
+st.write("Bienvenue sur l'interface de chatbot. Posez-moi des questions ou téléchargez un fichier !")
 
 # Initialisation de l'historique des conversations
 if 'chat_history' not in st.session_state:
@@ -35,7 +34,7 @@ if 'chat_history' not in st.session_state:
 
 # Formulaire d'entrée utilisateur
 with st.form(key='chat_form', clear_on_submit=True):
-    # Modification du placeholder avec un texte plus amusant
+    # Placeholder pour les questions
     user_input = st.text_input("Vous :", key="input", placeholder="Pose-moi une question et je réponds avec style !")
     submit_button = st.form_submit_button(label='Envoyer')
 
@@ -52,17 +51,22 @@ if submit_button and user_input:
 if len(st.session_state.chat_history) > 10:
     st.session_state.chat_history.pop(0)
 
-# Affichage de l'historique des échanges avec avatars et styles
+# Affichage de l'historique des échanges
 for sender, message in st.session_state.chat_history:
     if sender == "Vous":
-        # Ajout d'un avatar pour l'utilisateur et affichage des messages dans une boîte
-        st.image("user_icon.png", width=30)  # Remplacer par un chemin vers une icône utilisateur
-        st.markdown(f'<div style="border:1px solid #ccc; padding:10px;">**{sender}:** {message}</div>', unsafe_allow_html=True)
+        st.markdown(f'**{sender}:** {message}')
     else:
-        # Ajout d'un avatar pour le bot et affichage des messages dans une boîte
-        st.image("bot_icon.png", width=30)  # Remplacer par un chemin vers une icône bot
-        st.markdown(f'<div style="border:1px solid #f0f0f0; background-color:#f9f9f9; padding:10px;">*{sender}:* {message}</div>', unsafe_allow_html=True)
+        st.markdown(f'*{sender}:* {message}')
 
 # Ajout d'un bouton pour réinitialiser l'historique
 if st.button('Réinitialiser'):
     st.session_state.chat_history = []
+
+# Ajout d'une fonctionnalité simple pour télécharger des fichiers
+st.write("Téléchargez un fichier ci-dessous :")
+uploaded_file = st.file_uploader("Choisissez un fichier", type=['txt', 'csv', 'png', 'jpg'])
+
+if uploaded_file is not None:
+    # Afficher un message de confirmation de l'upload
+    st.success(f"Fichier {uploaded_file.name} téléchargé avec succès !")
+
