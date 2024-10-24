@@ -1,7 +1,6 @@
 import streamlit as st
 from mistralai import Mistral
 import pandas as pd
-import PyPDF2
 
 # Fonction pour générer une réponse à partir de l'API Mistral
 def generate_response(user_input, context=None):
@@ -83,7 +82,7 @@ if st.button('Réinitialiser'):
 
 # Section pour télécharger un fichier
 st.write("### Téléchargez un fichier")
-uploaded_file = st.file_uploader("Choisissez un fichier", type=["txt", "csv", "xlsx", "pdf"])
+uploaded_file = st.file_uploader("Choisissez un fichier", type=["txt", "csv", "xlsx"])
 
 # Si un fichier est téléchargé
 if uploaded_file is not None:
@@ -106,16 +105,7 @@ if uploaded_file is not None:
         st.session_state.file_content = df.to_string()  # Convertir le DataFrame en chaîne de caractères
         st.write("Aperçu du fichier Excel :")
         st.dataframe(df.head())  # Afficher les 5 premières lignes du fichier Excel
-    elif uploaded_file.type == "application/pdf":
-        # Utiliser PyPDF2 pour lire le fichier PDF
-        pdf_reader = PyPDF2.PdfReader(uploaded_file)
-        text = ""
-        for page in range(len(pdf_reader.pages)):
-            text += pdf_reader.pages[page].extract_text()  # Extraire le texte de chaque page
 
-        st.session_state.file_content = text  # Stocker le texte extrait dans l'état de la session
-        st.write("Contenu extrait du fichier PDF :")
-        st.text_area("Contenu", text, height=300)  # Afficher le texte extrait du PDF
 
 
 
